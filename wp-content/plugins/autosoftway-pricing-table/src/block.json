@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "create-block/autosoftway-pricing-table",
+	"version": "0.1.0",
+	"title": "AutoSoftway Pricing Table",
+	"category": "widgets",
+	"description": "The AutoSoftway pricing table organizes the data in to table with support for USD and CAD prices",
+	"example": {},
+	"attributes": {
+		"fallbackCurrentYear": {
+			"type": "string"
+		},
+		"showStartingYear": {
+			"type": "boolean"
+		},
+		"startingYear": {
+			"type": "string"
+		},
+		"tiers": {
+			"type": "array",
+			"default": []
+		}
+	},
+	"supports": {
+		"color": {
+			"background": false,
+			"text": true
+		},
+		"html": false,
+		"typography": {
+			"fontSize": true
+		}
+	},
+	"textdomain": "autosoftway-pricing-table",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}
