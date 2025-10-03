@@ -26,7 +26,7 @@ import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
  * @see https://developer.wordpress.org/block-editor/reference-guides/components/text-control/
  * @see https://developer.wordpress.org/block-editor/reference-guides/components/toggle-control/
  */
-import { PanelBody, TextControl, ToggleControl, Grid, CheckboxControl, CardDivider, HStack, Button, SVG, Path } from '@wordpress/components';
+import { PanelBody, TextControl, ToggleControl, Grid, CheckboxControl, CardDivider, __experimentalHStack as HStack, Button, SVG, Path } from '@wordpress/components';
 
 /**
  * Imports the useEffect React Hook. This is used to set an attribute when the
@@ -35,6 +35,7 @@ import { PanelBody, TextControl, ToggleControl, Grid, CheckboxControl, CardDivid
  * @see https://react.dev/reference/react/useEffect
  */
 import { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -53,6 +54,16 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	// Get the current year and make sure it's a string.
 	const currentYear = new Date().getFullYear().toString();
+
+	const deleteIcon = (
+						<SVG width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<Path d="M4 6H20L18.4199 20.2209C18.3074 21.2337 17.4512 22 16.4321 22H7.56786C6.54876 22 5.69264 21.2337 5.5801 20.2209L4 6Z" stroke="#ff0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="#fff"/>
+							<Path d="M7.34491 3.14716C7.67506 2.44685 8.37973 2 9.15396 2H14.846C15.6203 2 16.3249 2.44685 16.6551 3.14716L18 6H6L7.34491 3.14716Z" stroke="#ff0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="#fff"/>
+							<Path d="M2 6H22" stroke="#ff0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+							<Path d="M10 11V16" stroke="#ff0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+							<Path d="M14 11V16" stroke="#ff0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+						</SVG>
+					);
 
 	// When the block loads, set the fallbackCurrentYear attribute to the
 	// current year if it's not already set.
@@ -77,7 +88,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		}
 		if (!features || features.length === 0) {
 			setAttributes({features: [
-				{id: "0", name: "Feature 1"}, {id: "1", name: "Feature 2"}, {id: "2", name: "Feature 3"}, {id: "3", name: "Feature 4"}
+				{id: uuidv4(), name: "Feature 1"}, {id: uuidv4(), name: "Feature 2"}, {id: uuidv4(), name: "Feature 3"}, {id: uuidv4(), name: "Feature 4"}
 			]});
 		}
 	}, [ currentYear, fallbackCurrentYear, setAttributes, tiers, features ] );
@@ -122,35 +133,40 @@ export default function Edit( { attributes, setAttributes } ) {
 				</PanelBody>
 				<PanelBody title={ __( 'Features', 'autosoftway-pricing-table' ) }>
 					<>
-					{ attributes.features && attributes.features.map( ( feature, index ) => (
-						<HStack>
-							<TextControl
-								key={ index }
-								label={ __( `Feature ${ index + 1 }`, 'autosoftway-pricing-table' ) }
-								value={ feature.name }
-								onChange={ ( value ) => {
-									const newFeatures = [ ...attributes.features ];
-									newFeatures[ index ].name = value;
-									setAttributes( { features: newFeatures } );
-								} }
-							/>
-							{/* <Button
-								icon={<SVG viewBox="-2 -2 24 24" xmlns="http://www.w3.org/2000/svg"><Path d="M20 10c0-5.51-4.49-10-10-10C4.48 0 0 4.49 0 10c0 5.52 4.48 10 10 10 5.51 0 10-4.48 10-10zM7.78 15.37L4.37 6.22c.55-.02 1.17-.08 1.17-.08.5-.06.44-1.13-.06-1.11 0 0-1.45.11-2.37.11-.18 0-.37 0-.58-.01C4.12 2.69 6.87 1.11 10 1.11c2.33 0 4.45.87 6.05 2.34-.68-.11-1.65.39-1.65 1.58 0 .74.45 1.36.9 2.1.35.61.55 1.36.55 2.46 0 1.49-1.4 5-1.4 5l-3.03-8.37c.54-.02.82-.17.82-.17.5-.05.44-1.25-.06-1.22 0 0-1.44.12-2.38.12-.87 0-2.33-.12-2.33-.12-.5-.03-.56 1.2-.06 1.22l.92.08 1.26 3.41zM17.41 10c.24-.64.74-1.87.43-4.25.7 1.29 1.05 2.71 1.05 4.25 0 3.29-1.73 6.24-4.4 7.78.97-2.59 1.94-5.2 2.92-7.78zM6.1 18.09C3.12 16.65 1.11 13.53 1.11 10c0-1.3.23-2.48.72-3.59C3.25 10.3 4.67 14.2 6.1 18.09zm4.03-6.63l2.58 6.98c-.86.29-1.76.45-2.71.45-.79 0-1.57-.11-2.29-.33.81-2.38 1.62-4.74 2.42-7.1z" /></SVG>}
-								label="Code is poetry"
-								></Button> */}
-						</HStack>
-					) ) }
-					<button
-						style={{ marginTop: '12px' }}
-						className="components-button is-primary"
-						onClick={ () => {
-							const newFeatures = [ ...attributes.features ];
-							newFeatures.push( { id: (newFeatures.length).toString(), name: `Feature ${ newFeatures.length + 1 }` } );
-							setAttributes( { features: newFeatures } );
-						} }
-					>
-						{ __( 'Add Feature', 'autosoftway-pricing-table' ) }
-					</button>
+						{ attributes.features && attributes.features.map( ( feature, index ) => (
+							<HStack key={ index } gap="0" justify="start">
+								<TextControl
+									label={ __( `Feature ${ index + 1 }`, 'autosoftway-pricing-table' ) }
+									value={ feature.name }
+									onChange={ ( value ) => {
+										const newFeatures = [ ...attributes.features ];
+										newFeatures[ index ].name = value;
+										setAttributes( { features: newFeatures } );
+									} }
+								/>
+								<Button
+									style={{ padding: '0px', height: '24px', width: '24px', minWidth: '24px' }}
+									icon={deleteIcon}
+									label="Delete"
+									onClick={ () => {
+										const newFeatures = [ ...attributes.features ];
+										newFeatures.splice( index, 1 );
+										setAttributes( { features: newFeatures } );
+									} }
+								/>
+							</HStack>
+						) ) }
+						<button
+							style={{ marginTop: '12px' }}
+							className="components-button is-primary"
+							onClick={ () => {
+								const newFeatures = [ ...attributes.features ];
+								newFeatures.push( { id: uuidv4(), name: `Feature ${ newFeatures.length + 1 }` } );
+								setAttributes( { features: newFeatures } );
+							} }
+						>
+							{ __( 'Add Feature', 'autosoftway-pricing-table' ) }
+						</button>
 					</>
 				</PanelBody>
 				<PanelBody title={ __( 'Tiers', 'autosoftway-pricing-table' ) }>
@@ -158,7 +174,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						<>
 							<label style={{ fontWeight: 'bold', marginTop: '12px' }}>{ __( `Tier ${ index + 1 }`, 'autosoftway-pricing-table' ) }</label>
 							<TextControl
-								key={ index }
+								key={ `name-${index}` }
 								label={ __( `Name:`, 'autosoftway-pricing-table' ) }
 								value={ tier.name }
 								onChange={ ( value ) => {
@@ -168,7 +184,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								} }
 							/>
 							<TextControl
-								key={ index }
+								key={ `usd-${index}` }
 								label={ __( `Price USD:`, 'autosoftway-pricing-table' ) }
 								value={ tier.priceUSD }
 								onChange={ ( value ) => {
@@ -178,7 +194,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								} }
 							/>
 							<TextControl
-								key={ index }
+								key={ `cad-${index}` }
 								label={ __( `Price CAD:`, 'autosoftway-pricing-table' ) }
 								value={ tier.priceCAD }
 								onChange={ ( value ) => {
