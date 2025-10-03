@@ -20,6 +20,10 @@
 		"tiers": {
 			"type": "array",
 			"default": []
+		},
+		"features": {
+			"type": "array",
+			"default": []
 		}
 	},
 	"supports": {
