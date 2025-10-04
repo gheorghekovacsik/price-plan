@@ -25,6 +25,5 @@ export default function save( { attributes } ) {
 	// is loaded from a template/pattern, return null. In this case, block
 	// rendering will be handled by the render.php file.
 	
-
 	return <p { ...useBlockProps.save() }>© { "test" }</p>;
 }

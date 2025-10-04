@@ -1,0 +1,11 @@
+.app-autosoftway-pricing-table-desktop-header, .app-autosoftway-pricing-table-features {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 0px;
+}
+
+.app-autosoftway-pricing-table-desktop-header div, .app-autosoftway-pricing-table-features div {
+    flex: 1;
+}

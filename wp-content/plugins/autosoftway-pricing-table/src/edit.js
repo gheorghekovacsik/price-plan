@@ -245,7 +245,41 @@ export default function Edit( { attributes, setAttributes } ) {
 					) ) }
 				</PanelBody>
 			</InspectorControls>
-			<p { ...useBlockProps() }>© { "test>>" }</p>
+			<div { ...useBlockProps() }>
+				<div className='app-autosoftway-pricing-table-desktop-header'>
+					<div>
+						Features
+					</div>
+					{attributes.tiers && attributes.tiers.map((tier, index) => (
+						<div key={index} className="app-autosoftway-pricing-table-tier">
+							{tier.name}
+						</div>
+					))}
+				</div>
+				<div className='app-autosoftway-pricing-table-tabs'>
+					{attributes.featureCategories && attributes.featureCategories.map((category, index) => (
+						<div key={index} className="app-autosoftway-pricing-table-tab">
+							{category.name}
+						</div>
+					))}
+				</div>
+				<div className='app-autosoftway-pricing-table-desktop-features'>
+					{attributes.featureCategories && attributes.featureCategories.map((category, categoryIndex) => (
+						<div key={categoryIndex} className="app-autosoftway-pricing-table-feature-category">
+							<div className="app-autosoftway-pricing-table-feature-category-name">
+								{category.name}
+							</div>
+							{category.features && category.features.map((feature, featureIndex) => (
+								<div key={featureIndex} className="app-autosoftway-pricing-table-feature-row">
+									<div className="app-autosoftway-pricing-table-feature-name">
+										{feature.name}
+									</div>
+								</div>
+							))}
+						</div>
+					))}
+				</div>
+			</div>
 		</>
 	);
 }
