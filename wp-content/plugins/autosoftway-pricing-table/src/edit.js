@@ -50,10 +50,7 @@ import { v4 as uuidv4 } from 'uuid';
  * @return {Element} Element to render.
  */
 export default function Edit( { attributes, setAttributes } ) {
-	const { fallbackCurrentYear, showStartingYear, startingYear, tiers, features } = attributes;
-
-	// Get the current year and make sure it's a string.
-	const currentYear = new Date().getFullYear().toString();
+	const { tiers, featureCategories } = attributes;
 
 	const deleteIcon = (
 						<SVG width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,9 +65,6 @@ export default function Edit( { attributes, setAttributes } ) {
 	// When the block loads, set the fallbackCurrentYear attribute to the
 	// current year if it's not already set.
 	useEffect( () => {
-		if ( currentYear !== fallbackCurrentYear ) {
-			setAttributes( { fallbackCurrentYear: currentYear } );
-		}
 		if (!tiers || tiers.length === 0) {
 			setAttributes({tiers:[{
 					name: "Free", features: [], priceCAD: "$0", priceUSD: "$0", buttonText: "Sign Up", buttonUrl: "#", isPopular: false
@@ -86,86 +80,79 @@ export default function Edit( { attributes, setAttributes } ) {
 				}
 			]});
 		}
-		if (!features || features.length === 0) {
-			setAttributes({features: [
-				{id: uuidv4(), name: "Feature 1"}, {id: uuidv4(), name: "Feature 2"}, {id: uuidv4(), name: "Feature 3"}, {id: uuidv4(), name: "Feature 4"}
+		if (!featureCategories || featureCategories.length === 0) {
+			setAttributes({featureCategories: [
+				{id: uuidv4(), name: "Category 1", features: [
+					{id: uuidv4(), name: "Feature 1"},
+					{id: uuidv4(), name: "Feature 2"},
+					{id: uuidv4(), name: "Feature 3"},
+					{id: uuidv4(), name: "Feature 4"}
+				]},
+				{id: uuidv4(), name: "Category 2", features: [
+					{id: uuidv4(), name: "Feature 5"}
+				]}
 			]});
 		}
-	}, [ currentYear, fallbackCurrentYear, setAttributes, tiers, features ] );
-
-	let displayDate;
-
-	// Display the starting year as well if supplied by the user.
-	if ( showStartingYear && startingYear ) {
-		displayDate = startingYear + '–' + currentYear;
-	} else {
-		displayDate = currentYear;
-	}
+	}, [ tiers, featureCategories ] );
 
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Settings', 'autosoftway-pricing-table' ) }>
-					<ToggleControl
-						checked={ showStartingYear }
-						label={ __(
-							'Show starting year',
-							'autosoftway-pricing-table'
-						) }
-						onChange={ () =>
-							setAttributes( {
-								showStartingYear: ! showStartingYear,
-							} )
-						}
-					/>
-					{ showStartingYear && (
-						<TextControl
-							label={ __(
-								'Starting year',
-								'autosoftway-pricing-table'
-							) }
-							value={ startingYear }
-							onChange={ ( value ) =>
-								setAttributes( { startingYear: value } )
-							}
-						/>
-					) }
-				</PanelBody>
 				<PanelBody title={ __( 'Features', 'autosoftway-pricing-table' ) }>
 					<>
-						{ attributes.features && attributes.features.map( ( feature, index ) => (
-							<HStack key={ index } gap="0" justify="start">
-								<TextControl
-									label={ __( `Feature ${ index + 1 }`, 'autosoftway-pricing-table' ) }
-									value={ feature.name }
-									onChange={ ( value ) => {
-										const newFeatures = [ ...attributes.features ];
-										newFeatures[ index ].name = value;
-										setAttributes( { features: newFeatures } );
-									} }
-								/>
-								<Button
-									style={{ padding: '0px', height: '24px', width: '24px', minWidth: '24px' }}
-									icon={deleteIcon}
-									label="Delete"
+						{ attributes.featureCategories && attributes.featureCategories.map( ( category, categoryIndex ) => (
+							<div key={ categoryIndex }>
+								<label style={{ fontWeight: 'bold', marginTop: '12px' }}>{ __( category.name, 'autosoftway-pricing-table' ) }</label>
+								{ category.features && category.features.map( ( feature, featureIndex ) => (
+									<HStack key={ featureIndex } gap="0" justify="start">
+										<TextControl
+											label={ __( `Feature ${ featureIndex + 1 }`, 'autosoftway-pricing-table' ) }
+											value={ feature.name }
+											onChange={ ( value ) => {
+												const features = [ ...category.features ];
+												features[ featureIndex ].name = value;
+												setAttributes( { featureCategories: [ ...attributes.featureCategories.slice( 0, categoryIndex ), { ...category, features }, ...attributes.featureCategories.slice( categoryIndex + 1 ) ] } );
+											} }
+										/>
+										<Button
+											style={{ padding: '0px', height: '24px', width: '24px', minWidth: '24px' }}
+											icon={deleteIcon}
+											label="Delete"
+											onClick={ () => {
+												const newFeatures = [ ...category.features ];
+												newFeatures.splice( featureIndex, 1 );
+												const newFeatureCategories = [ ...attributes.featureCategories ];
+												newFeatureCategories[ categoryIndex ] = { ...category, features: newFeatures };
+												setAttributes( { featureCategories: newFeatureCategories } );
+											} }
+										/>
+									</HStack>
+								) ) }
+								<button
+									style={{ marginTop: '12px' }}
+									className="components-button is-primary"
 									onClick={ () => {
-										const newFeatures = [ ...attributes.features ];
-										newFeatures.splice( index, 1 );
-										setAttributes( { features: newFeatures } );
+										const newFeatures = [ ...category.features ];
+										newFeatures.push( { id: uuidv4(), name: `Feature ${ newFeatures.length + 1 }` } );
+										const newFeatureCategories = [ ...attributes.featureCategories ];
+										newFeatureCategories[ categoryIndex ] = { ...category, features: newFeatures };
+										setAttributes( { featureCategories: newFeatureCategories } );
 									} }
-								/>
-							</HStack>
+								>
+									{ __( 'Add Feature', 'autosoftway-pricing-table' ) }
+								</button>
+							</div>
 						) ) }
 						<button
 							style={{ marginTop: '12px' }}
 							className="components-button is-primary"
 							onClick={ () => {
-								const newFeatures = [ ...attributes.features ];
-								newFeatures.push( { id: uuidv4(), name: `Feature ${ newFeatures.length + 1 }` } );
-								setAttributes( { features: newFeatures } );
+								const newCategories = [ ...attributes.featureCategories ];
+								newCategories.push( { id: uuidv4(), name: `Category ${ newCategories.length + 1 }`, features: [] } );
+								setAttributes( { featureCategories: newCategories } );
 							} }
 						>
-							{ __( 'Add Feature', 'autosoftway-pricing-table' ) }
+							{ __( 'Add Category', 'autosoftway-pricing-table' ) }
 						</button>
 					</>
 				</PanelBody>
@@ -203,28 +190,37 @@ export default function Edit( { attributes, setAttributes } ) {
 									setAttributes( { tiers: newTiers } );
 								} }
 							/>
-							{ attributes.features && attributes.features.map( ( feature, featureIndex ) => (
-								<CheckboxControl
-									key={ featureIndex }
-									label={ __( feature.name, 'autosoftway-pricing-table' ) }
-									checked={ tier.features.includes( feature.id ) }
-									onChange={ ( value ) => {
-										const newTiers = [ ...attributes.tiers ];
-										if ( value ) {
-											newTiers[ index ].features.push( feature.id );
-										} else {
-											newTiers[ index ].features = newTiers[ index ].features.filter( ( id ) => id !== feature.id );
-										}
-										setAttributes( { tiers: newTiers } );
-									} }
-								/>
+							{ attributes.featureCategories.length > 0 && attributes.featureCategories.map( ( featureCategory, featureCategoryIndex ) => (
+								<>
+									<label style={{ fontWeight: 'bold', paddingTop: '18px', paddingBottom: '10px' }}>{ __( featureCategory.name, 'autosoftway-pricing-table' ) }</label>
+									{ featureCategory.features && featureCategory.features.map( ( feature, featureIndex ) => (
+										<CheckboxControl
+											key={ `feature-${featureCategoryIndex}-${featureIndex}` }
+											label={ feature.name }
+											checked={ tier.features && tier.features.includes( feature.id ) }
+											onChange={ ( isChecked ) => {
+												const newTiers = [ ...attributes.tiers ];
+												if ( isChecked ) {
+													if ( !newTiers[ index ].features ) {
+														newTiers[ index ].features = [];
+													}
+													newTiers[ index ].features.push( feature.id );
+												} else {
+													newTiers[ index ].features = newTiers[ index ].features.filter( ( id ) => id !== feature.id );
+												}
+												setAttributes( { tiers: newTiers } );
+											} }
+										/>
+									) ) }
+								</>
+								
 							) ) }
 							<CardDivider />
 						</>
 					) ) }
 				</PanelBody>
 			</InspectorControls>
-			<p { ...useBlockProps() }>© { displayDate }</p>
+			<p { ...useBlockProps() }>© { "test>>" }</p>
 		</>
 	);
 }

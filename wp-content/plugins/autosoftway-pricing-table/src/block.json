@@ -8,20 +8,11 @@
 	"description": "The AutoSoftway pricing table organizes the data in to table with support for USD and CAD prices",
 	"example": {},
 	"attributes": {
-		"fallbackCurrentYear": {
-			"type": "string"
-		},
-		"showStartingYear": {
-			"type": "boolean"
-		},
-		"startingYear": {
-			"type": "string"
-		},
 		"tiers": {
 			"type": "array",
 			"default": []
 		},
-		"features": {
+		"featureCategories": {
 			"type": "array",
 			"default": []
 		}
