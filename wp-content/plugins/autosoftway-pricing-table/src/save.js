@@ -18,61 +18,68 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {Element} Element to render.
  */
+
 export default function save( { attributes } ) {
 	const { tiers, featureCategories } = attributes;
 
-	// If there is no fallbackCurrentYear, which could happen if the block
-	// is loaded from a template/pattern, return null. In this case, block
-	// rendering will be handled by the render.php file.
-	
-	return <div { ...useBlockProps().save() } className="app-autosoftway-pricing-table">
-					<div className='app-autosoftway-pricing-table-desktop-header'>
-						<div>
-							Features
+	// Inline SVGs for checkmark and hyphen
+	const checkMarkIcon = (
+		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M5 13l4 4L19 7" stroke="#36ce3d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+		</svg>
+	);
+	const hyphenIcon = (
+		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M5 13h14" stroke="#aaa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+		</svg>
+	);
+
+	return (
+		<div { ...useBlockProps.save() }>
+			<div className='app-autosoftway-pricing-table-desktop-header'>
+				<div>Features</div>
+				{tiers && tiers.map((tier, index) => (
+					<div key={index} className={`app-autosoftway-pricing-table-tier ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
+						{tier.isPopular && <div className='app-autosoftway-pricing-table-tier-popular-badge'>Most Popular</div>}
+						{tier.name}
+						<div className='app-autosoftway-pricing-table-tier-price'>
+							<span className='app-autosoftway-pricing-table-tier-price-cad'>{tier.priceCAD}</span>
+							<span className='app-autosoftway-pricing-table-tier-price-usd'> / {tier.priceUSD} USD</span>
 						</div>
-						{attributes.tiers && attributes.tiers.map((tier, index) => (
-							<div key={index} className={`app-autosoftway-pricing-table-tier ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
-								{
-								  tier.isPopular && <div className='app-autosoftway-pricing-table-tier-popular-badge'>Most Popular</div>
-								}
-								{tier.name}
-								<div className='app-autosoftway-pricing-table-tier-price'>
-									<span className='app-autosoftway-pricing-table-tier-price-cad'>{tier.priceCAD}</span>
-									<span className='app-autosoftway-pricing-table-tier-price-usd'> / {tier.priceUSD} USD</span>
-								</div>
-								<a href={tier.buttonUrl} className={`app-autosoftway-pricing-table-tier-button`}>
-									{tier.buttonText}
-								</a>
-							</div>
-						))}
+						<a href={tier.buttonUrl} className={`app-autosoftway-pricing-table-tier-button`}>
+							{tier.buttonText}
+						</a>
 					</div>
-					<div className='app-autosoftway-pricing-table-tabs'>
-						{attributes.featureCategories && attributes.featureCategories.map((category, index) => (
-							<div key={index} className="app-autosoftway-pricing-table-tab">
-								{category.name}
-							</div>
-						))}
+				))}
+			</div>
+			<div className='app-autosoftway-pricing-table-tabs'>
+				{featureCategories && featureCategories.map((category, index) => (
+					<div key={index} className="app-autosoftway-pricing-table-tab">
+						{category.name}
 					</div>
-					<div className='app-autosoftway-pricing-table-desktop-features'>
-						{attributes.featureCategories && attributes.featureCategories.map((category, categoryIndex) => (
-							<div key={categoryIndex} className="app-autosoftway-pricing-table-feature-category">
-								<div className="app-autosoftway-pricing-table-feature-category-name">
-									{category.name}
+				))}
+			</div>
+			<div className='app-autosoftway-pricing-table-desktop-features'>
+				{featureCategories && featureCategories.map((category, categoryIndex) => (
+					<div key={categoryIndex} className="app-autosoftway-pricing-table-feature-category">
+						<div className="app-autosoftway-pricing-table-feature-category-name">
+							{category.name}
+						</div>
+						{category.features && category.features.map((feature, featureIndex) => (
+							<div key={featureIndex} className="app-autosoftway-pricing-table-feature-row">
+								<div className="app-autosoftway-pricing-table-feature-name">
+									{feature.name}
 								</div>
-								{category.features && category.features.map((feature, featureIndex) => (
-									<div key={featureIndex} className="app-autosoftway-pricing-table-feature-row">
-										<div className="app-autosoftway-pricing-table-feature-name">
-											{feature.name}
-										</div>
-										{attributes.tiers && attributes.tiers.map((tier, index) => (
-											<div key={index} className={`app-autosoftway-pricing-table-checkmark ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
-												{tier.features && tier.features.includes(feature.id) ? checkMarkIcon : hyphenIcon}
-											</div>
-										))}
+								{tiers && tiers.map((tier, index) => (
+									<div key={index} className={`app-autosoftway-pricing-table-checkmark ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
+										{tier.features && tier.features.includes(feature.id) ? checkMarkIcon : hyphenIcon}
 									</div>
 								))}
 							</div>
 						))}
 					</div>
-				</div>;
+				))}
+			</div>
+		</div>
+	);
 }
