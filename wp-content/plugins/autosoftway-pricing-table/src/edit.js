@@ -264,8 +264,18 @@ export default function Edit( { attributes, setAttributes } ) {
 						Features
 					</div>
 					{attributes.tiers && attributes.tiers.map((tier, index) => (
-						<div key={index} className="app-autosoftway-pricing-table-tier">
+						<div key={index} className={`app-autosoftway-pricing-table-tier ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
+							{
+							  tier.isPopular && <div className='app-autosoftway-pricing-table-tier-popular-badge'>Most Popular</div>
+							}
 							{tier.name}
+							<div className='app-autosoftway-pricing-table-tier-price'>
+								<span className='app-autosoftway-pricing-table-tier-price-cad'>{tier.priceCAD}</span>
+								<span className='app-autosoftway-pricing-table-tier-price-usd'> / {tier.priceUSD} USD</span>
+							</div>
+							<a href={tier.buttonUrl} className={`app-autosoftway-pricing-table-tier-button`}>
+								{tier.buttonText}
+							</a>
 						</div>
 					))}
 				</div>

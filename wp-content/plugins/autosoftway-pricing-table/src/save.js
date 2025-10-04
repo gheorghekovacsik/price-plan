@@ -25,5 +25,54 @@ export default function save( { attributes } ) {
 	// is loaded from a template/pattern, return null. In this case, block
 	// rendering will be handled by the render.php file.
 	
-	return <p { ...useBlockProps.save() }>© { "test" }</p>;
+	return <div { ...useBlockProps().save() } className="app-autosoftway-pricing-table">
+					<div className='app-autosoftway-pricing-table-desktop-header'>
+						<div>
+							Features
+						</div>
+						{attributes.tiers && attributes.tiers.map((tier, index) => (
+							<div key={index} className={`app-autosoftway-pricing-table-tier ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
+								{
+								  tier.isPopular && <div className='app-autosoftway-pricing-table-tier-popular-badge'>Most Popular</div>
+								}
+								{tier.name}
+								<div className='app-autosoftway-pricing-table-tier-price'>
+									<span className='app-autosoftway-pricing-table-tier-price-cad'>{tier.priceCAD}</span>
+									<span className='app-autosoftway-pricing-table-tier-price-usd'> / {tier.priceUSD} USD</span>
+								</div>
+								<a href={tier.buttonUrl} className={`app-autosoftway-pricing-table-tier-button`}>
+									{tier.buttonText}
+								</a>
+							</div>
+						))}
+					</div>
+					<div className='app-autosoftway-pricing-table-tabs'>
+						{attributes.featureCategories && attributes.featureCategories.map((category, index) => (
+							<div key={index} className="app-autosoftway-pricing-table-tab">
+								{category.name}
+							</div>
+						))}
+					</div>
+					<div className='app-autosoftway-pricing-table-desktop-features'>
+						{attributes.featureCategories && attributes.featureCategories.map((category, categoryIndex) => (
+							<div key={categoryIndex} className="app-autosoftway-pricing-table-feature-category">
+								<div className="app-autosoftway-pricing-table-feature-category-name">
+									{category.name}
+								</div>
+								{category.features && category.features.map((feature, featureIndex) => (
+									<div key={featureIndex} className="app-autosoftway-pricing-table-feature-row">
+										<div className="app-autosoftway-pricing-table-feature-name">
+											{feature.name}
+										</div>
+										{attributes.tiers && attributes.tiers.map((tier, index) => (
+											<div key={index} className={`app-autosoftway-pricing-table-checkmark ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
+												{tier.features && tier.features.includes(feature.id) ? checkMarkIcon : hyphenIcon}
+											</div>
+										))}
+									</div>
+								))}
+							</div>
+						))}
+					</div>
+				</div>;
 }
