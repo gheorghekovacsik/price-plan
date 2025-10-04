@@ -26,7 +26,7 @@ import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
  * @see https://developer.wordpress.org/block-editor/reference-guides/components/text-control/
  * @see https://developer.wordpress.org/block-editor/reference-guides/components/toggle-control/
  */
-import { PanelBody, TextControl, ToggleControl, Grid, CheckboxControl, CardDivider, __experimentalHStack as HStack, Button, SVG, Path } from '@wordpress/components';
+import { PanelBody, TextControl, ToggleControl, Grid, CheckboxControl, CardDivider, __experimentalHStack as HStack, Button, SVG, Path, __experimentalSpacer as Spacer } from '@wordpress/components';
 
 /**
  * Imports the useEffect React Hook. This is used to set an attribute when the
@@ -102,7 +102,29 @@ export default function Edit( { attributes, setAttributes } ) {
 					<>
 						{ attributes.featureCategories && attributes.featureCategories.map( ( category, categoryIndex ) => (
 							<div key={ categoryIndex }>
-								<label style={{ fontWeight: 'bold', marginTop: '12px' }}>{ __( category.name, 'autosoftway-pricing-table' ) }</label>
+								<HStack key={ categoryIndex } gap="0" justify="start">
+									<TextControl
+										key={ `category-name-${categoryIndex}` }
+										label={ __( 'Category Name:', 'autosoftway-pricing-table' ) }
+										value={ category.name }
+										onChange={ ( value ) => {
+											const newCategories = [ ...attributes.featureCategories ];
+											newCategories[ categoryIndex ].name = value;
+											setAttributes( { featureCategories: newCategories } );
+										} }
+									/>
+									<Button
+										style={{ padding: '0px', height: '24px', width: '24px', minWidth: '24px' }}
+										icon={deleteIcon}
+										label="Delete"
+										onClick={ () => {
+											const newFeatureCategories = [ ...attributes.featureCategories ];
+											newFeatureCategories.splice( categoryIndex, 1 );
+											setAttributes( { featureCategories: newFeatureCategories } );
+										} }
+									/>
+								</HStack>
+								<br />
 								{ category.features && category.features.map( ( feature, featureIndex ) => (
 									<HStack key={ featureIndex } gap="0" justify="start">
 										<TextControl
@@ -141,6 +163,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								>
 									{ __( 'Add Feature', 'autosoftway-pricing-table' ) }
 								</button>
+								<CardDivider />
 							</div>
 						) ) }
 						<button
@@ -154,6 +177,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						>
 							{ __( 'Add Category', 'autosoftway-pricing-table' ) }
 						</button>
+						
 					</>
 				</PanelBody>
 				<PanelBody title={ __( 'Tiers', 'autosoftway-pricing-table' ) }>
@@ -192,7 +216,8 @@ export default function Edit( { attributes, setAttributes } ) {
 							/>
 							{ attributes.featureCategories.length > 0 && attributes.featureCategories.map( ( featureCategory, featureCategoryIndex ) => (
 								<>
-									<label style={{ fontWeight: 'bold', paddingTop: '18px', paddingBottom: '10px' }}>{ __( featureCategory.name, 'autosoftway-pricing-table' ) }</label>
+									<label style={{ fontWeight: 'bold' }}>{ __( featureCategory.name, 'autosoftway-pricing-table' ) }</label>
+									<Spacer height="8px" />
 									{ featureCategory.features && featureCategory.features.map( ( feature, featureIndex ) => (
 										<CheckboxControl
 											key={ `feature-${featureCategoryIndex}-${featureIndex}` }
