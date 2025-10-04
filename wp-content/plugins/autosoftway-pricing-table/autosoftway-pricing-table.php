@@ -2,12 +2,13 @@
 /**
  * Plugin Name:       AutoSoftway Pricing Table 
  * Description:       This is an Autosoftway Pricing Table Plugin.
- * Version:           0.1.0
+ * Version:           1.0.0
  * Requires at least: 6.7
  * Requires PHP:      7.4
- * Author:            The WordPress Contributors
- * License:           GPL-2.0-or-later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Author:            Jamie Klapwyk
+ * Author URI:        https://linkedin.com/in/jamieklapwyk/
+ * License:           Apache 2.0
+ * License URI:       https://www.apache.org/licenses/LICENSE-2.0.html
  * Text Domain:       autosoftway-pricing-table
  *
  * @package           create-block
