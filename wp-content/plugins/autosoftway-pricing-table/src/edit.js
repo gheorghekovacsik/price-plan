@@ -53,7 +53,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	const { tiers, featureCategories } = attributes;
 
 	const deleteIcon = (
-						<SVG width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<SVG width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<Path d="M4 6H20L18.4199 20.2209C18.3074 21.2337 17.4512 22 16.4321 22H7.56786C6.54876 22 5.69264 21.2337 5.5801 20.2209L4 6Z" stroke="#ff0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="#fff"/>
 							<Path d="M7.34491 3.14716C7.67506 2.44685 8.37973 2 9.15396 2H14.846C15.6203 2 16.3249 2.44685 16.6551 3.14716L18 6H6L7.34491 3.14716Z" stroke="#ff0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="#fff"/>
 							<Path d="M2 6H22" stroke="#ff0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -61,6 +61,19 @@ export default function Edit( { attributes, setAttributes } ) {
 							<Path d="M14 11V16" stroke="#ff0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 						</SVG>
 					);
+
+	const checkMarkIcon = (
+		<SVG width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<Path d="M5 13l4 4L19 7" stroke="#36ce3d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+		</SVG>
+	);
+
+	const hyphenIcon = (
+		<SVG width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<Path d="M5 13h14" stroke="#aaa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+		</SVG>
+	);
+
 
 	// When the block loads, set the fallbackCurrentYear attribute to the
 	// current year if it's not already set.
@@ -274,6 +287,11 @@ export default function Edit( { attributes, setAttributes } ) {
 									<div className="app-autosoftway-pricing-table-feature-name">
 										{feature.name}
 									</div>
+									{attributes.tiers && attributes.tiers.map((tier, index) => (
+										<div key={index} className={`app-autosoftway-pricing-table-checkmark ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
+											{tier.features && tier.features.includes(feature.id) ? checkMarkIcon : hyphenIcon}
+										</div>
+									))}
 								</div>
 							))}
 						</div>

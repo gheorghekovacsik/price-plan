@@ -1,11 +1,78 @@
-.app-autosoftway-pricing-table-desktop-header, .app-autosoftway-pricing-table-features {
+.app-autosoftway-pricing-table-desktop-header, .app-autosoftway-pricing-table-features, .app-autosoftway-pricing-table-feature-row {
     display: flex;
     justify-content: center;
-    align-items: center;
     width: 100%;
     gap: 0px;
 }
 
-.app-autosoftway-pricing-table-desktop-header div, .app-autosoftway-pricing-table-features div {
+.app-autosoftway-pricing-table-desktop-header, .app-autosoftway-pricing-table-features {
+    align-items: center;
+}
+
+
+
+.app-autosoftway-pricing-table-desktop-header div, .app-autosoftway-pricing-table-features div, .app-autosoftway-pricing-table-feature-row div {
     flex: 1;
+}
+
+.app-autosoftway-pricing-table-tabs {
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    width: 100%;
+    gap: 10px;
+    border-bottom: 1px solid #ccc;
+    font-size: 0.8em;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow-x: auto;
+}
+
+.app-autosoftway-pricing-table-tabs div {
+    flex: 10 0 auto;
+    text-align: center;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.app-autosoftway-pricing-table-tabs div:hover {
+    background-color: #eee;
+}
+
+.app-autosoftway-pricing-table-feature-category-name {
+    font-size: 1.2em;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.app-autosoftway-pricing-table-features div {
+
+}
+
+.app-autosoftway-pricing-table-feature-row {
+    font-size: 0.8em;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.app-autosoftway-pricing-table-feature-name {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+.app-autosoftway-pricing-popular-background {
+    background-color: #efefef;
+}
+
+.app-autosoftway-pricing-table-checkmark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
