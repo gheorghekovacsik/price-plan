@@ -36,6 +36,14 @@ export default function save( { attributes } ) {
 
 	return (
 		<div { ...useBlockProps.save() }>
+			<div className='app-autosoftway-pricing-table-currency-toggle'>
+				<div>USD</div>
+				<label class="app-autosoftway-pricing-switch">
+					<input type="checkbox"/>
+					<span class="app-autosoftway-pricing-slider"></span>
+				</label>
+				<div>CAD</div>
+			</div>
 			<div className='app-autosoftway-pricing-table-desktop-header'>
 				<div>Features</div>
 				{tiers && tiers.map((tier, index) => (
