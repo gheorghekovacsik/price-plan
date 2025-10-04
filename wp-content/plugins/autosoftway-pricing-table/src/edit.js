@@ -80,16 +80,16 @@ export default function Edit( { attributes, setAttributes } ) {
 	useEffect( () => {
 		if (!tiers || tiers.length === 0) {
 			setAttributes({tiers:[{
-					name: "Free", features: [], priceCAD: "$0", priceUSD: "$0", buttonText: "Sign Up", buttonUrl: "#", isPopular: false
+					name: "Free", features: [], priceCAD: "$0", priceUSD: "$0", buttonText: "Get Started", buttonUrl: "#", isPopular: false
 				},
 				{
 					name: "Basic", features: [], priceCAD: "$10", priceUSD: "$8", buttonText: "Get Started", buttonUrl: "#", isPopular: false
 				},
 				{
-					name: "Standard", features: [], priceCAD: "$20", priceUSD: "$16", buttonText: "Sign Up", buttonUrl: "#", isPopular: true
+					name: "Standard", features: [], priceCAD: "$20", priceUSD: "$16", buttonText: "Get Started", buttonUrl: "#", isPopular: true
 				},
 				{
-					name: "Premium", features: [], priceCAD: "$30", priceUSD: "$24", buttonText: "Get Started", buttonUrl: "#", isPopular: false
+					name: "Premium", features: [], priceCAD: "$30", priceUSD: "$24", buttonText: "Contact Us", buttonUrl: "#", isPopular: false
 				}
 			]});
 		}
@@ -273,7 +273,9 @@ export default function Edit( { attributes, setAttributes } ) {
 								<span className='app-autosoftway-pricing-table-tier-price-cad'>{tier.priceCAD}</span>
 								<span className='app-autosoftway-pricing-table-tier-price-usd'> / {tier.priceUSD} USD</span>
 							</div>
-							<a href={tier.buttonUrl} className={`app-autosoftway-pricing-table-tier-button`}>
+							<a
+								href={tier.buttonUrl}
+								className="app-autosoftway-pricing-table-tier-button wp-element-button">
 								{tier.buttonText}
 							</a>
 						</div>
@@ -282,7 +284,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				<div className='app-autosoftway-pricing-table-tabs'>
 					{attributes.featureCategories && attributes.featureCategories.map((category, index) => (
 						<div key={index} className="app-autosoftway-pricing-table-tab">
-							{category.name}
+							<a href={`#category-${category.id}`}>{category.name}</a>
 						</div>
 					))}
 				</div>
@@ -290,7 +292,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					{attributes.featureCategories && attributes.featureCategories.map((category, categoryIndex) => (
 						<div key={categoryIndex} className="app-autosoftway-pricing-table-feature-category">
 							<div className="app-autosoftway-pricing-table-feature-category-name">
-								{category.name}
+								<div id={`category-${category.id}`}>{category.name}</div>
 							</div>
 							{category.features && category.features.map((feature, featureIndex) => (
 								<div key={featureIndex} className="app-autosoftway-pricing-table-feature-row">

@@ -104,3 +104,19 @@
     font-size: 0.6em;
     box-sizing: border-box;
 }
+
+.app-autosoftway-pricing-table-tier-button {
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.app-autosoftway-pricing-table-feature-category-name a, .app-autosoftway-pricing-table-tabs a {
+    color: inherit;
+    text-decoration: none;
+}

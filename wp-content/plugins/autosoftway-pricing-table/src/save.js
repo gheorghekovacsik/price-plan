@@ -46,7 +46,7 @@ export default function save( { attributes } ) {
 							<span className='app-autosoftway-pricing-table-tier-price-cad'>{tier.priceCAD}</span>
 							<span className='app-autosoftway-pricing-table-tier-price-usd'> / {tier.priceUSD} USD</span>
 						</div>
-						<a href={tier.buttonUrl} className={`app-autosoftway-pricing-table-tier-button`}>
+						<a href={tier.buttonUrl} className="app-autosoftway-pricing-table-tier-button wp-element-button">	
 							{tier.buttonText}
 						</a>
 					</div>
@@ -55,7 +55,7 @@ export default function save( { attributes } ) {
 			<div className='app-autosoftway-pricing-table-tabs'>
 				{featureCategories && featureCategories.map((category, index) => (
 					<div key={index} className="app-autosoftway-pricing-table-tab">
-						{category.name}
+						<a href={`#category-${category.id}`}>{category.name}</a>
 					</div>
 				))}
 			</div>
@@ -63,7 +63,7 @@ export default function save( { attributes } ) {
 				{featureCategories && featureCategories.map((category, categoryIndex) => (
 					<div key={categoryIndex} className="app-autosoftway-pricing-table-feature-category">
 						<div className="app-autosoftway-pricing-table-feature-category-name">
-							{category.name}
+							<div id={`category-${category.id}`}>{category.name}</div>
 						</div>
 						{category.features && category.features.map((feature, featureIndex) => (
 							<div key={featureIndex} className="app-autosoftway-pricing-table-feature-row">
