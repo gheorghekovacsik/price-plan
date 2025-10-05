@@ -29,6 +29,20 @@ const calendarIcon = (
 	</svg>
 );
 
+let showTier = (index) => {
+	console.log(">>> showTier called with index:", index);
+    document.querySelectorAll('.app-autosoftway-pricing-table-tier').forEach((tier, tierIndex) => {
+		console.log(">>> showTier called with index:", index, "tierIndex:", tierIndex);
+        if (tierIndex === index) {
+            tier.classList.add('tier-active');
+            tier.classList.remove('tier-not-active');
+        } else {
+            tier.classList.remove('tier-active');
+            tier.classList.add('tier-not-active');
+        }
+    });
+};
+
 /**
  * Every block starts by registering a new block type definition.
  *
@@ -43,5 +57,5 @@ registerBlockType( metadata.name, {
 	/**
 	 * @see ./save.js
 	 */
-	save,
+	save
 } );

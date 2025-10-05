@@ -40,7 +40,7 @@
 }
 
 
-.app-autosoftway-pricing-table-tabs {
+.app-autosoftway-pricing-table-tabs, .app-autosoftway-pricing-table-tiers-tabs {
     display: flex;
     justify-content: start;
     align-items: flex-start;
@@ -64,7 +64,13 @@
     border-radius: 10px;
 }
 
-.app-autosoftway-pricing-table-tabs div:hover {
+.app-autosoftway-pricing-table-tier-tab {
+    flex: 1 0 auto;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.app-autosoftway-pricing-table-tabs div:hover, .app-autosoftway-pricing-table-tiers-tabs div:hover {
     background-color: #eee;
 }
 
@@ -124,9 +130,22 @@
     cursor: pointer;
 }
 
-.app-autosoftway-pricing-table-feature-category-name a, .app-autosoftway-pricing-table-tabs a {
+.app-autosoftway-pricing-table-feature-category-name a, .app-autosoftway-pricing-table-tabs a, .app-autosoftway-pricing-table-tiers-tabs button {
     color: inherit;
     text-decoration: none;
+}
+
+.app-autosoftway-pricing-table-tiers-tabs button {
+    background: none;
+    border: none;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 400;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .app-autosoftway-pricing-table-currency-toggle {
@@ -201,4 +220,32 @@
 
 .app-autosoftway-pricing-switch input[type="checkbox"]:checked:active + .app-autosoftway-pricing-slider::after {
  transform: translateX(calc(var(--button-width) - var(--toggle-wider) - var(--button-toggle-offset)));
+}
+
+.tier-active {
+    display: block;
+}
+.tier-not-active {
+    display: block;
+}
+
+.app-autosoftway-pricing-table-tiers-tabs {
+    display:none;
+}
+
+// Responsive styles
+@media (max-width: 600px) {
+    .app-autosoftway-pricing-table-tabs {
+        display: none;
+    }
+    .app-autosoftway-pricing-table-tiers-tabs {
+        display:flex;
+    }
+
+    .tier-active {
+        display: block;
+    }
+    .tier-not-active {
+        display: none;
+    }
 }

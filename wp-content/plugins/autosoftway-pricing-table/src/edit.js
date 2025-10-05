@@ -296,7 +296,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						Features
 					</div>
 					{attributes.tiers && attributes.tiers.map((tier, index) => (
-						<div key={index} className={`app-autosoftway-pricing-table-tier ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
+						<div id={`tier-${index}`} className={`app-autosoftway-pricing-table-tier ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
 							{
 							  tier.isPopular && <div className='app-autosoftway-pricing-table-tier-popular-badge'>Most Popular</div>
 							}
@@ -323,6 +323,14 @@ export default function Edit( { attributes, setAttributes } ) {
 						</div>
 					))}
 				</div>
+				<div className='app-autosoftway-pricing-table-tiers-tabs'>
+					{attributes.tiers && attributes.tiers.map((tier, index) => (
+						<div key={index} className="app-autosoftway-pricing-table-tier-tab">
+							<button>{tier.name}</button>
+						</div>
+					))}
+				</div>
+				
 				<div className='app-autosoftway-pricing-table-desktop-features'>
 					{attributes.featureCategories && attributes.featureCategories.map((category, categoryIndex) => (
 						<div key={categoryIndex} className="app-autosoftway-pricing-table-feature-category">
@@ -335,7 +343,7 @@ export default function Edit( { attributes, setAttributes } ) {
 										{feature.name}
 									</div>
 									{attributes.tiers && attributes.tiers.map((tier, index) => (
-										<div key={index} className={`app-autosoftway-pricing-table-checkmark ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
+										<div className={`tier-checkmark-${index} app-autosoftway-pricing-table-checkmark ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
 											{tier.features && tier.features.includes(feature.id) ? checkMarkIcon : hyphenIcon}
 										</div>
 									))}

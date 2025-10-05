@@ -62,7 +62,7 @@ export default function save( { attributes } ) {
 			<div className='app-autosoftway-pricing-table-desktop-header'>
 				<div>Features</div>
 				{tiers && tiers.map((tier, index) => (
-					<div key={index} className={`app-autosoftway-pricing-table-tier ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
+					<div key={index} className={`app-autosoftway-pricing-table-tier ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''} ${index === 0 ? 'tier-active' : 'tier-not-active'}`}>
 						{tier.isPopular && <div className='app-autosoftway-pricing-table-tier-popular-badge'>Most Popular</div>}
 						{tier.name}
 						<div className='app-autosoftway-pricing-table-tier-price'>
@@ -82,6 +82,32 @@ export default function save( { attributes } ) {
 					</div>
 				))}
 			</div>
+			<div className='app-autosoftway-pricing-table-tiers-tabs'>
+				{tiers && tiers.map((tier, index) => (
+					<div key={index} className="app-autosoftway-pricing-table-tier-tab">
+						<button id={index} onClick="
+						document.querySelectorAll('.app-autosoftway-pricing-table-tier').forEach((tier, tierIndex) => {
+							if (tierIndex === parseInt(this.id)) {
+							tier.classList.add('tier-active');
+								tier.classList.remove('tier-not-active');
+							} else {
+								tier.classList.remove('tier-active');
+								tier.classList.add('tier-not-active');
+							}
+						});
+						for (let i = 0; i < 4; i++) {
+							if (i == parseInt(this.id)) {
+								document.querySelectorAll('.tier-checkmark-' + i).forEach((el) => el.classList.remove('tier-not-active'));
+								document.querySelectorAll('.tier-checkmark-' + i).forEach((el) => el.classList.add('tier-active'));
+							} else {
+								document.querySelectorAll('.tier-checkmark-' + i).forEach((el) => el.classList.remove('tier-active'));
+								document.querySelectorAll('.tier-checkmark-' + i).forEach((el) => el.classList.add('tier-not-active'));
+							}
+						}
+					">{tier.name}</button>
+					</div>
+				))}
+			</div>
 			<div className='app-autosoftway-pricing-table-desktop-features'>
 				{featureCategories && featureCategories.map((category, categoryIndex) => (
 					<div key={categoryIndex} className="app-autosoftway-pricing-table-feature-category">
@@ -94,7 +120,7 @@ export default function save( { attributes } ) {
 									{feature.name}
 								</div>
 								{tiers && tiers.map((tier, index) => (
-									<div key={index} className={`app-autosoftway-pricing-table-checkmark ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
+									<div key={index} className={`tier-checkmark-${index} app-autosoftway-pricing-table-checkmark ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''} ${index === 0 ? 'tier-active' : 'tier-not-active'}`}>
 										{tier.features && tier.features.includes(feature.id) ? checkMarkIcon : hyphenIcon}
 									</div>
 								))}
