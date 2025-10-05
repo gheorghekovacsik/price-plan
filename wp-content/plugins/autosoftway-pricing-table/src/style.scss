@@ -225,8 +225,13 @@
 .tier-active {
     display: block;
 }
+
 .tier-not-active {
     display: block;
+}
+
+.tier-feature-not-active {
+    display: flex;
 }
 
 .app-autosoftway-pricing-table-tiers-tabs {
@@ -245,7 +250,7 @@
     .tier-active {
         display: block;
     }
-    .tier-not-active {
+    .tier-not-active, .tier-feature-not-active {
         display: none;
     }
 }

@@ -97,11 +97,11 @@ export default function save( { attributes } ) {
 						});
 						for (let i = 0; i < 4; i++) {
 							if (i == parseInt(this.id)) {
-								document.querySelectorAll('.tier-checkmark-' + i).forEach((el) => el.classList.remove('tier-not-active'));
+								document.querySelectorAll('.tier-checkmark-' + i).forEach((el) => el.classList.remove('tier-feature-not-active'));
 								document.querySelectorAll('.tier-checkmark-' + i).forEach((el) => el.classList.add('tier-active'));
 							} else {
 								document.querySelectorAll('.tier-checkmark-' + i).forEach((el) => el.classList.remove('tier-active'));
-								document.querySelectorAll('.tier-checkmark-' + i).forEach((el) => el.classList.add('tier-not-active'));
+								document.querySelectorAll('.tier-checkmark-' + i).forEach((el) => el.classList.add('tier-feature-not-active'));
 							}
 						}
 					">{tier.name}</button>
@@ -120,7 +120,7 @@ export default function save( { attributes } ) {
 									{feature.name}
 								</div>
 								{tiers && tiers.map((tier, index) => (
-									<div key={index} className={`tier-checkmark-${index} app-autosoftway-pricing-table-checkmark ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''} ${index === 0 ? 'tier-active' : 'tier-not-active'}`}>
+									<div key={index} className={`tier-checkmark-${index} app-autosoftway-pricing-table-checkmark ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''} ${index === 0 ? 'tier-active' : 'tier-feature-not-active'}`}>
 										{tier.features && tier.features.includes(feature.id) ? checkMarkIcon : hyphenIcon}
 									</div>
 								))}
