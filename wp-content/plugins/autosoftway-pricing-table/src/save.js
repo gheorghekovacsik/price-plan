@@ -20,7 +20,9 @@ import { useBlockProps } from '@wordpress/block-editor';
  */
 
 export default function save( { attributes } ) {
-	const { tiers, featureCategories } = attributes;
+	const { tiers, featureCategories, currency } = attributes;
+
+	let currentCurrency = currency;
 
 	// Inline SVGs for checkmark and hyphen
 	const checkMarkIcon = (
@@ -34,13 +36,26 @@ export default function save( { attributes } ) {
 		</svg>
 	);
 
+	const handleCurrencyToggle = ( event ) => {
+		const isChecked = event.target.checked;
+		currentCurrency = isChecked ? 'CAD' : 'USD';
+		console.log('Currency toggled to:', currentCurrency);
+		// Note: In the save function, we cannot call setAttributes.
+		// The currency state should be managed in the edit function and saved as an attribute.
+		// This is just a placeholder to indicate where the logic would go.
+	}
+
 	return (
 		<div { ...useBlockProps.save() }>
 			<div className='app-autosoftway-pricing-table-currency-toggle'>
 				<div>USD</div>
-				<label class="app-autosoftway-pricing-switch">
-					<input type="checkbox"/>
-					<span class="app-autosoftway-pricing-slider"></span>
+				<label className="app-autosoftway-pricing-switch">
+					<input
+						type="checkbox"
+						onChange="document.querySelectorAll('.show-usd').forEach(item => item.style.display = this.checked ? 'none' : 'block'); document.querySelectorAll('.show-cad').forEach(item => item.style.display = this.checked ? 'block' : 'none');"
+						checked={currentCurrency === 'CAD'}
+					/>
+					<span className="app-autosoftway-pricing-slider"></span>
 				</label>
 				<div>CAD</div>
 			</div>
@@ -51,8 +66,8 @@ export default function save( { attributes } ) {
 						{tier.isPopular && <div className='app-autosoftway-pricing-table-tier-popular-badge'>Most Popular</div>}
 						{tier.name}
 						<div className='app-autosoftway-pricing-table-tier-price'>
-							<span className='app-autosoftway-pricing-table-tier-price-cad'>{tier.priceCAD}</span>
-							<span className='app-autosoftway-pricing-table-tier-price-usd'> / {tier.priceUSD} USD</span>
+								<span className='app-autosoftway-pricing-table-tier-price-money show-cad' style={{ display: currentCurrency === 'CAD' ? 'block' : 'none' }}>{tier.priceCAD} <span className="app-autosoftway-pricing-table-tier-price-suffix">CAD / month</span></span>
+								<span className='app-autosoftway-pricing-table-tier-price-money show-usd' style={{ display: currentCurrency === 'USD' ? 'block' : 'none' }}>{tier.priceUSD} <span className="app-autosoftway-pricing-table-tier-price-suffix">USD / month</span></span>
 						</div>
 						<a href={tier.buttonUrl} className="app-autosoftway-pricing-table-tier-button wp-element-button">	
 							{tier.buttonText}

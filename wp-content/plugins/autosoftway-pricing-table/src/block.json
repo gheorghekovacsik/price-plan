@@ -15,6 +15,10 @@
 		"featureCategories": {
 			"type": "array",
 			"default": []
+		},
+		"currency": {
+			"type": "string",
+			"default": "USD"
 		}
 	},
 	"supports": {

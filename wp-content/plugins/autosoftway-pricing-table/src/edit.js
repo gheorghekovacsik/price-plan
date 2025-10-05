@@ -50,7 +50,7 @@ import { v4 as uuidv4 } from 'uuid';
  * @return {Element} Element to render.
  */
 export default function Edit( { attributes, setAttributes } ) {
-	const { tiers, featureCategories } = attributes;
+	const { tiers, featureCategories, currency } = attributes;
 
 	const deleteIcon = (
 						<SVG width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -227,6 +227,26 @@ export default function Edit( { attributes, setAttributes } ) {
 									setAttributes( { tiers: newTiers } );
 								} }
 							/>
+							<TextControl
+								key={ `cad-${index}` }
+								label={ __( `Button Label:`, 'autosoftway-pricing-table' ) }
+								value={ tier.buttonText }
+								onChange={ ( value ) => {
+									const newTiers = [ ...attributes.tiers ];
+									newTiers[ index ].buttonText = value;
+									setAttributes( { tiers: newTiers } );
+								} }
+							/>
+							<TextControl
+								key={ `cad-${index}` }
+								label={ __( `Button url:`, 'autosoftway-pricing-table' ) }
+								value={ tier.buttonUrl }
+								onChange={ ( value ) => {
+									const newTiers = [ ...attributes.tiers ];
+									newTiers[ index ].buttonUrl = value;
+									setAttributes( { tiers: newTiers } );
+								} }
+							/>
 							{ attributes.featureCategories.length > 0 && attributes.featureCategories.map( ( featureCategory, featureCategoryIndex ) => (
 								<>
 									<label style={{ fontWeight: 'bold' }}>{ __( featureCategory.name, 'autosoftway-pricing-table' ) }</label>
@@ -262,7 +282,10 @@ export default function Edit( { attributes, setAttributes } ) {
 				<div className='app-autosoftway-pricing-table-currency-toggle'>
 					<div>USD</div>
 					<label class="app-autosoftway-pricing-switch">
-						<input type="checkbox"/>
+						<input type="checkbox" onChange={ ( event ) => {
+							const isChecked = event.target.checked;
+							setAttributes( { currency: isChecked ? 'CAD' : 'USD' } );
+						} }/>
 						<span class="app-autosoftway-pricing-slider"></span>
 					</label>
 					<div>CAD</div>
@@ -279,8 +302,11 @@ export default function Edit( { attributes, setAttributes } ) {
 							}
 							{tier.name}
 							<div className='app-autosoftway-pricing-table-tier-price'>
-								<span className='app-autosoftway-pricing-table-tier-price-cad'>{tier.priceCAD}</span>
-								<span className='app-autosoftway-pricing-table-tier-price-usd'> / {tier.priceUSD} USD</span>
+								{currency === 'CAD' ? (
+									<span className='app-autosoftway-pricing-table-tier-price-money'>{tier.priceCAD} <span className="app-autosoftway-pricing-table-tier-price-suffix">CAD / month</span></span>
+								) : (
+									<span className='app-autosoftway-pricing-table-tier-price-money'>{tier.priceUSD} <span className="app-autosoftway-pricing-table-tier-price-suffix">USD / month</span></span>
+								)}
 							</div>
 							<a
 								href={tier.buttonUrl}
