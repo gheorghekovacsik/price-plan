@@ -23,7 +23,7 @@ If everything goes well you should be able to access the Wordpress installation 
 Now that you have the Wordpress installation run:
 
 ```
-cd wp-content/plugins/autosoftway-pricing-table
+cd wp-content/plugins/onesoftway-pricing-table
 npm start
 ```
 
@@ -34,6 +34,6 @@ This will update and deploy the plugin automatically in the local Wordpress depl
 You can package the plugin and create a zip file by running:
 
 ```
-cd wp-content/plugins/autosoftway-pricing-table
+cd wp-content/plugins/onesoftway-pricing-table
 npm plugin-zip
 ```

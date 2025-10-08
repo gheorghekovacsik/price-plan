@@ -1,11 +1,11 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "create-block/autosoftway-pricing-table",
-	"version": "0.1.0",
-	"title": "AutoSoftway Pricing Table",
+	"name": "create-block/onesoftway-pricing-table",
+	"version": "1.0.0",
+	"title": "OneSoftWay Pricing Table",
 	"category": "widgets",
-	"description": "The AutoSoftway pricing table organizes the data in to table with support for USD and CAD prices",
+	"description": "The OneSoftWay Pricing Table is a customizable WordPress block plugin that displays feature-rich pricing tables with support for multiple tiers, feature categories, and both USD and CAD prices. It allows easy management of pricing options and feature lists directly within the block editor.",
 	"example": {},
 	"attributes": {
 		"tiers": {
@@ -32,7 +32,7 @@
 			"fontSize": true
 		}
 	},
-	"textdomain": "autosoftway-pricing-table",
+	"textdomain": "onesoftway-pricing-table",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css"

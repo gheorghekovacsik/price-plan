@@ -230,6 +230,10 @@
     display: block;
 }
 
+.tier-feature-active {
+    display: flex;
+}
+
 .tier-feature-not-active {
     display: flex;
 }
@@ -250,6 +254,11 @@
     .tier-active {
         display: block;
     }
+    
+    .tier-feature-active {
+        display: flex;
+    }
+
     .tier-not-active, .tier-feature-not-active {
         display: none;
     }

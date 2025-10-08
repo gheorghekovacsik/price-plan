@@ -1,15 +1,15 @@
 <?php
 /**
- * Plugin Name:       AutoSoftway Pricing Table 
- * Description:       This is an Autosoftway Pricing Table Plugin.
+ * Plugin Name:       OneSoftWay Pricing Table 
+ * Description:       The OneSoftWay Pricing Table is a customizable WordPress block plugin that displays feature-rich pricing tables with support for multiple tiers, feature categories, and both USD and CAD prices. It allows easy management of pricing options and feature lists directly within the block editor.
  * Version:           1.0.0
  * Requires at least: 6.7
  * Requires PHP:      7.4
- * Author:            Jamie Klapwyk
- * Author URI:        https://linkedin.com/in/jamieklapwyk/
- * License:           Apache 2.0
- * License URI:       https://www.apache.org/licenses/LICENSE-2.0.html
- * Text Domain:       autosoftway-pricing-table
+ * Author:            OneSoftWay
+ * Author URI:        https://onesoftway.com
+ * License:           GPL-2.0-or-later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       onesoftway-pricing-table
  *
  * @package           create-block
  */
