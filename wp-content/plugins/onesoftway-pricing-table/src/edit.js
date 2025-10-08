@@ -136,6 +136,44 @@ export default function Edit( { attributes, setAttributes } ) {
 											setAttributes( { featureCategories: newFeatureCategories } );
 										} }
 									/>
+									<div>
+										<Button
+											style={{ padding: '0px', height: '18px', width: '32px', minWidth: '32px' }}
+											icon={
+												<SVG width="32" height="18" viewBox="0 0 32 18" fill="none">
+													<Path d="M16 6l-6 6h12l-6-6z" fill="#888" />
+												</SVG>
+											}
+											label="Move Up"
+											disabled={categoryIndex === 0}
+											onClick={() => {
+												if (categoryIndex === 0) return;
+												const newCategories = [...attributes.featureCategories];
+												const temp = newCategories[categoryIndex - 1];
+												newCategories[categoryIndex - 1] = newCategories[categoryIndex];
+												newCategories[categoryIndex] = temp;
+												setAttributes({ featureCategories: newCategories });
+											}}
+										/>
+										<Button
+											style={{ padding: '0px', height: '18px', width: '32px', minWidth: '32px' }}
+											icon={
+												<SVG width="32" height="18" viewBox="0 0 32 18" fill="none">
+													<Path d="M16 12l6-6H10l6 6z" fill="#888" />
+												</SVG>
+											}
+											label="Move Down"
+											disabled={categoryIndex === attributes.featureCategories.length - 1}
+											onClick={() => {
+												if (categoryIndex === attributes.featureCategories.length - 1) return;
+												const newCategories = [...attributes.featureCategories];
+												const temp = newCategories[categoryIndex + 1];
+												newCategories[categoryIndex + 1] = newCategories[categoryIndex];
+												newCategories[categoryIndex] = temp;
+												setAttributes({ featureCategories: newCategories });
+											}}
+										/>
+										</div>
 								</HStack>
 								<br />
 								{ category.features && category.features.map( ( feature, featureIndex ) => (
@@ -161,6 +199,48 @@ export default function Edit( { attributes, setAttributes } ) {
 												setAttributes( { featureCategories: newFeatureCategories } );
 											} }
 										/>
+										<div>
+											<Button
+												style={{ padding: '0px', height: '18px', width: '32px', minWidth: '32px' }}
+												icon={
+													<SVG width="32" height="18" viewBox="0 0 32 18" fill="none">
+														<Path d="M16 12l-6 6h12l-6-6z" fill="#888" />
+													</SVG>
+												}
+												label="Move Up"
+												disabled={featureIndex === 0}
+												onClick={() => {
+													if (featureIndex === 0) return;
+													const features = [...category.features];
+													const temp = features[featureIndex - 1];
+													features[featureIndex - 1] = features[featureIndex];
+													features[featureIndex] = temp;
+													const newFeatureCategories = [...attributes.featureCategories];
+													newFeatureCategories[categoryIndex] = { ...category, features };
+													setAttributes({ featureCategories: newFeatureCategories });
+												}}
+											/>
+											<Button
+												style={{ padding: '0px', height: '18px', width: '32px', minWidth: '32px' }}
+												icon={
+													<SVG width="32" height="18" viewBox="0 0 32 18" fill="none">
+														<Path d="M16 16l6-6H10l6 6z" fill="#888" />
+													</SVG>
+												}
+												label="Move Down"
+												disabled={featureIndex === category.features.length - 1}
+												onClick={() => {
+													if (featureIndex === category.features.length - 1) return;
+													const features = [...category.features];
+													const temp = features[featureIndex + 1];
+													features[featureIndex + 1] = features[featureIndex];
+													features[featureIndex] = temp;
+													const newFeatureCategories = [...attributes.featureCategories];
+													newFeatureCategories[categoryIndex] = { ...category, features };
+													setAttributes({ featureCategories: newFeatureCategories });
+												}}
+											/>
+										</div>
 									</HStack>
 								) ) }
 								<button
@@ -247,6 +327,20 @@ export default function Edit( { attributes, setAttributes } ) {
 									setAttributes( { tiers: newTiers } );
 								} }
 							/>
+							<ToggleControl
+								key={ `popular-${index}` }
+								label={ __( 'Is Popular', 'onesoftway-pricing-table' ) }
+								checked={ tier.isPopular }
+								onChange={ ( value ) => {
+									const newTiers = [ ...attributes.tiers ];
+									newTiers[ index ].isPopular = value;
+									// Ensure only one tier is marked as popular
+									newTiers.forEach((t, i) => {
+										newTiers[i].isPopular = (i === index) ? value : false;
+									});
+									setAttributes( { tiers: newTiers } );
+								} }
+							/>
 							{ attributes.featureCategories.length > 0 && attributes.featureCategories.map( ( featureCategory, featureCategoryIndex ) => (
 								<>
 									<label style={{ fontWeight: 'bold' }}>{ __( featureCategory.name, 'onesoftway-pricing-table' ) }</label>
@@ -273,9 +367,33 @@ export default function Edit( { attributes, setAttributes } ) {
 								</>
 								
 							) ) }
+							<Button
+								style={{ marginTop: '12px' }}
+								variant="secondary"
+								isDestructive
+								icon={deleteIcon}
+								onClick={ () => {
+									const newTiers = [ ...attributes.tiers ];
+									newTiers.splice( index, 1 );
+									setAttributes( { tiers: newTiers } );
+								} }
+							>
+								{ __( 'Delete Tier', 'onesoftway-pricing-table' ) }
+							</Button>
 							<CardDivider />
 						</>
 					) ) }
+					<button
+						style={{ marginTop: '12px' }}
+						className="components-button is-primary"
+						onClick={ () => {
+							const newTiers = [ ...attributes.tiers ];
+							newTiers.push( { name: `Tier ${ newTiers.length + 1 }`, features: [], priceCAD: "$0", priceUSD: "$0", buttonText: "Get Started", buttonUrl: "#", isPopular: false } );
+							setAttributes( { tiers: newTiers } );
+						} }
+					>
+						{ __( 'Add Tier', 'onesoftway-pricing-table' ) }
+					</button>
 				</PanelBody>
 			</InspectorControls>
 			<div { ...useBlockProps() }>
