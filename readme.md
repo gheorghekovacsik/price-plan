@@ -35,5 +35,5 @@ You can package the plugin and create a zip file by running:
 
 ```
 cd wp-content/plugins/onesoftway-pricing-table
-npm plugin-zip
+npm run plugin-zip
 ```
