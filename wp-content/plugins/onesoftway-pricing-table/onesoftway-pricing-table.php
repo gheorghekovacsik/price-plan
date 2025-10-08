@@ -7,7 +7,7 @@
  * Requires PHP:      7.4
  * Author:            OneSoftWay
  * Author URI:        https://onesoftway.com
- * License:           GPL-2.0-or-later
+ * License:           GPL-2.0
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       onesoftway-pricing-table
  *
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function create_block_autosoftway_pricing_table_init() {
+function create_block_onesoftway_pricing_table_init() {
 	register_block_type( __DIR__ . '/build' );
 }
-add_action( 'init', 'create_block_autosoftway_pricing_table_init' );
+add_action( 'init', 'create_block_onesoftway_pricing_table_init' );

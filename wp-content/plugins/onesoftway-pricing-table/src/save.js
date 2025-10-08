@@ -47,46 +47,46 @@ export default function save( { attributes } ) {
 
 	return (
 		<div { ...useBlockProps.save() }>
-			<div className='app-autosoftway-pricing-table-currency-toggle'>
+			<div className='app-onesoftway-pricing-table-currency-toggle'>
 				<div>USD</div>
-				<label className="app-autosoftway-pricing-switch">
+				<label className="app-onesoftway-pricing-switch">
 					<input
 						type="checkbox"
 						onChange="document.querySelectorAll('.show-usd').forEach(item => item.style.display = this.checked ? 'none' : 'block'); document.querySelectorAll('.show-cad').forEach(item => item.style.display = this.checked ? 'block' : 'none');"
 						checked={currentCurrency === 'CAD'}
 					/>
-					<span className="app-autosoftway-pricing-slider"></span>
+					<span className="app-onesoftway-pricing-slider"></span>
 				</label>
 				<div>CAD</div>
 			</div>
-			<div className='app-autosoftway-pricing-table-desktop-header'>
+			<div className='app-onesoftway-pricing-table-desktop-header'>
 				<div>Features</div>
 				{tiers && tiers.map((tier, index) => (
-					<div key={index} className={`app-autosoftway-pricing-table-tier ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''} ${index === 0 ? 'tier-active' : 'tier-not-active'}`}>
-						{tier.isPopular && <div className='app-autosoftway-pricing-table-tier-popular-badge'>Most Popular</div>}
+					<div key={index} className={`app-onesoftway-pricing-table-tier ${tier.isPopular ? 'app-onesoftway-pricing-popular-background' : ''} ${index === 0 ? 'tier-active' : 'tier-not-active'}`}>
+						{tier.isPopular && <div className='app-onesoftway-pricing-table-tier-popular-badge'>Most Popular</div>}
 						{tier.name}
-						<div className='app-autosoftway-pricing-table-tier-price'>
-								<span className='app-autosoftway-pricing-table-tier-price-money show-cad' style={{ display: currentCurrency === 'CAD' ? 'block' : 'none' }}>{tier.priceCAD} <span className="app-autosoftway-pricing-table-tier-price-suffix">CAD / month</span></span>
-								<span className='app-autosoftway-pricing-table-tier-price-money show-usd' style={{ display: currentCurrency === 'USD' ? 'block' : 'none' }}>{tier.priceUSD} <span className="app-autosoftway-pricing-table-tier-price-suffix">USD / month</span></span>
+						<div className='app-onesoftway-pricing-table-tier-price'>
+								<span className='app-onesoftway-pricing-table-tier-price-money show-cad' style={{ display: currentCurrency === 'CAD' ? 'block' : 'none' }}>{tier.priceCAD} <span className="app-onesoftway-pricing-table-tier-price-suffix">CAD / month</span></span>
+								<span className='app-onesoftway-pricing-table-tier-price-money show-usd' style={{ display: currentCurrency === 'USD' ? 'block' : 'none' }}>{tier.priceUSD} <span className="app-onesoftway-pricing-table-tier-price-suffix">USD / month</span></span>
 						</div>
-						<a href={tier.buttonUrl} className="app-autosoftway-pricing-table-tier-button wp-element-button">	
+						<a href={tier.buttonUrl} className="app-onesoftway-pricing-table-tier-button wp-element-button">	
 							{tier.buttonText}
 						</a>
 					</div>
 				))}
 			</div>
-			<div className='app-autosoftway-pricing-table-tabs'>
+			<div className='app-onesoftway-pricing-table-tabs'>
 				{featureCategories && featureCategories.map((category, index) => (
-					<div key={index} className="app-autosoftway-pricing-table-tab">
+					<div key={index} className="app-onesoftway-pricing-table-tab">
 						<a href={`#category-${category.id}`}>{category.name}</a>
 					</div>
 				))}
 			</div>
-			<div className='app-autosoftway-pricing-table-tiers-tabs'>
+			<div className='app-onesoftway-pricing-table-tiers-tabs'>
 				{tiers && tiers.map((tier, index) => (
-					<div key={index} className="app-autosoftway-pricing-table-tier-tab">
+					<div key={index} className="app-onesoftway-pricing-table-tier-tab">
 						<button id={index} onClick="
-						document.querySelectorAll('.app-autosoftway-pricing-table-tier').forEach((tier, tierIndex) => {
+						document.querySelectorAll('.app-onesoftway-pricing-table-tier').forEach((tier, tierIndex) => {
 							if (tierIndex === parseInt(this.id)) {
 							tier.classList.add('tier-active');
 								tier.classList.remove('tier-not-active');
@@ -108,19 +108,19 @@ export default function save( { attributes } ) {
 					</div>
 				))}
 			</div>
-			<div className='app-autosoftway-pricing-table-desktop-features'>
+			<div className='app-onesoftway-pricing-table-desktop-features'>
 				{featureCategories && featureCategories.map((category, categoryIndex) => (
-					<div key={categoryIndex} className="app-autosoftway-pricing-table-feature-category">
-						<div className="app-autosoftway-pricing-table-feature-category-name">
+					<div key={categoryIndex} className="app-onesoftway-pricing-table-feature-category">
+						<div className="app-onesoftway-pricing-table-feature-category-name">
 							<div id={`category-${category.id}`}>{category.name}</div>
 						</div>
 						{category.features && category.features.map((feature, featureIndex) => (
-							<div key={featureIndex} className="app-autosoftway-pricing-table-feature-row">
-								<div className="app-autosoftway-pricing-table-feature-name">
+							<div key={featureIndex} className="app-onesoftway-pricing-table-feature-row">
+								<div className="app-onesoftway-pricing-table-feature-name">
 									{feature.name}
 								</div>
 								{tiers && tiers.map((tier, index) => (
-									<div key={index} className={`tier-checkmark-${index} app-autosoftway-pricing-table-checkmark ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''} ${index === 0 ? 'tier-feature-active' : 'tier-feature-not-active'}`}>
+									<div key={index} className={`tier-checkmark-${index} app-onesoftway-pricing-table-checkmark ${tier.isPopular ? 'app-onesoftway-pricing-popular-background' : ''} ${index === 0 ? 'tier-feature-active' : 'tier-feature-not-active'}`}>
 										{tier.features && tier.features.includes(feature.id) ? checkMarkIcon : hyphenIcon}
 									</div>
 								))}

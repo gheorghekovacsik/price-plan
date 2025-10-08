@@ -1,34 +1,34 @@
-.app-autosoftway-pricing-table-desktop-header, .app-autosoftway-pricing-table-features, .app-autosoftway-pricing-table-feature-row {
+.app-onesoftway-pricing-table-desktop-header, .app-onesoftway-pricing-table-features, .app-onesoftway-pricing-table-feature-row {
     display: flex;
     justify-content: center;
     width: 100%;
     gap: 0px;
 }
 
-.app-autosoftway-pricing-table-desktop-header, .app-autosoftway-pricing-table-features {
+.app-onesoftway-pricing-table-desktop-header, .app-onesoftway-pricing-table-features {
     align-items: center;
 }
 
-.app-autosoftway-pricing-table-desktop-header {
+.app-onesoftway-pricing-table-desktop-header {
     border-bottom: 1px solid #ddd;
     background-color: #fdfdfd;
 }
 
-.app-autosoftway-pricing-table-desktop-header .app-autosoftway-pricing-table-tier-price {
+.app-onesoftway-pricing-table-desktop-header .app-onesoftway-pricing-table-tier-price {
     font-size: 0.8em;
     color: #666;
 }
 
-.app-autosoftway-pricing-table-desktop-header .app-autosoftway-pricing-table-tier-price .app-autosoftway-pricing-table-tier-price-suffix {
+.app-onesoftway-pricing-table-desktop-header .app-onesoftway-pricing-table-tier-price .app-onesoftway-pricing-table-tier-price-suffix {
     font-size: 0.8em;
     color: #999;
 }
 
-.app-autosoftway-pricing-table-desktop-header div, .app-autosoftway-pricing-table-features div, .app-autosoftway-pricing-table-feature-row div {
+.app-onesoftway-pricing-table-desktop-header div, .app-onesoftway-pricing-table-features div, .app-onesoftway-pricing-table-feature-row div {
     flex: 1;
 }
 
-.app-autosoftway-pricing-table-desktop-header div {
+.app-onesoftway-pricing-table-desktop-header div {
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -40,7 +40,7 @@
 }
 
 
-.app-autosoftway-pricing-table-tabs, .app-autosoftway-pricing-table-tiers-tabs {
+.app-onesoftway-pricing-table-tabs, .app-onesoftway-pricing-table-tiers-tabs {
     display: flex;
     justify-content: start;
     align-items: flex-start;
@@ -53,7 +53,7 @@
     overflow-x: auto;
 }
 
-.app-autosoftway-pricing-table-tabs div {
+.app-onesoftway-pricing-table-tabs div {
     flex: 10 0 auto;
     text-align: center;
     padding-left: 14px;
@@ -64,51 +64,51 @@
     border-radius: 10px;
 }
 
-.app-autosoftway-pricing-table-tier-tab {
+.app-onesoftway-pricing-table-tier-tab {
     flex: 1 0 auto;
     text-align: center;
     border-radius: 10px;
 }
 
-.app-autosoftway-pricing-table-tabs div:hover, .app-autosoftway-pricing-table-tiers-tabs div:hover {
+.app-onesoftway-pricing-table-tabs div:hover, .app-onesoftway-pricing-table-tiers-tabs div:hover {
     background-color: #eee;
 }
 
-.app-autosoftway-pricing-table-feature-category-name {
+.app-onesoftway-pricing-table-feature-category-name {
     font-size: 1.2em;
     padding-top: 30px;
     padding-bottom: 10px;
     border-bottom: 1px solid #ddd;
 }
 
-.app-autosoftway-pricing-table-features div {
+.app-onesoftway-pricing-table-features div {
 
 }
 
-.app-autosoftway-pricing-table-feature-row {
+.app-onesoftway-pricing-table-feature-row {
     font-size: 0.8em;
     border-bottom: 1px solid #ccc;
     text-align: center;
 }
 
-.app-autosoftway-pricing-table-feature-name {
+.app-onesoftway-pricing-table-feature-name {
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: left;
 }
 
-.app-autosoftway-pricing-popular-background {
+.app-onesoftway-pricing-popular-background {
     background-color: #efefef;
 }
 
-.app-autosoftway-pricing-table-checkmark {
+.app-onesoftway-pricing-table-checkmark {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.app-autosoftway-pricing-table-desktop-header .app-autosoftway-pricing-table-tier-popular-badge {
+.app-onesoftway-pricing-table-desktop-header .app-onesoftway-pricing-table-tier-popular-badge {
     background-color: #7a7a7a;
     width: 100%;
     color: white;
@@ -119,7 +119,7 @@
     box-sizing: border-box;
 }
 
-.app-autosoftway-pricing-table-tier-button {
+.app-onesoftway-pricing-table-tier-button {
     border: none;
     padding: 8px 20px;
     border-radius: 8px;
@@ -130,12 +130,12 @@
     cursor: pointer;
 }
 
-.app-autosoftway-pricing-table-feature-category-name a, .app-autosoftway-pricing-table-tabs a, .app-autosoftway-pricing-table-tiers-tabs button {
+.app-onesoftway-pricing-table-feature-category-name a, .app-onesoftway-pricing-table-tabs a, .app-onesoftway-pricing-table-tiers-tabs button {
     color: inherit;
     text-decoration: none;
 }
 
-.app-autosoftway-pricing-table-tiers-tabs button {
+.app-onesoftway-pricing-table-tiers-tabs button {
     background: none;
     border: none;
     text-decoration: none;
@@ -148,7 +148,7 @@
     padding-bottom: 8px;
 }
 
-.app-autosoftway-pricing-table-currency-toggle {
+.app-onesoftway-pricing-table-currency-toggle {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -166,7 +166,7 @@
 
 
 
-.app-autosoftway-pricing-switch {
+.app-onesoftway-pricing-switch {
  --button-width: 3.5em;
  --button-height: 2em;
  --toggle-diameter: 1.5em;
@@ -177,7 +177,7 @@
  --color-green: #aaa;
 }
 
-.app-autosoftway-pricing-slider {
+.app-onesoftway-pricing-slider {
  display: inline-block;
  width: var(--button-width);
  height: var(--button-height);
@@ -187,7 +187,7 @@
  transition: 0.3s all ease-in-out;
 }
 
-.app-autosoftway-pricing-slider::after {
+.app-onesoftway-pricing-slider::after {
  content: "";
  display: inline-block;
  width: var(--toggle-diameter);
@@ -201,24 +201,24 @@
  transition: 0.3s all ease-in-out;
 }
 
-.app-autosoftway-pricing-switch input[type="checkbox"]:checked + .app-autosoftway-pricing-slider {
+.app-onesoftway-pricing-switch input[type="checkbox"]:checked + .app-onesoftway-pricing-slider {
  background-color: var(--color-green);
 }
 
-.app-autosoftway-pricing-switch input[type="checkbox"]:checked + .app-autosoftway-pricing-slider::after {
+.app-onesoftway-pricing-switch input[type="checkbox"]:checked + .app-onesoftway-pricing-slider::after {
  transform: translateX(calc(var(--button-width) - var(--toggle-diameter) - var(--button-toggle-offset)));
  box-shadow: calc(var(--toggle-shadow-offset) * -1) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
 }
 
-.app-autosoftway-pricing-switch input[type="checkbox"] {
+.app-onesoftway-pricing-switch input[type="checkbox"] {
  display: none;
 }
 
-.app-autosoftway-pricing-switch input[type="checkbox"]:active + .app-autosoftway-pricing-slider::after {
+.app-onesoftway-pricing-switch input[type="checkbox"]:active + .app-onesoftway-pricing-slider::after {
  width: var(--toggle-wider);
 }
 
-.app-autosoftway-pricing-switch input[type="checkbox"]:checked:active + .app-autosoftway-pricing-slider::after {
+.app-onesoftway-pricing-switch input[type="checkbox"]:checked:active + .app-onesoftway-pricing-slider::after {
  transform: translateX(calc(var(--button-width) - var(--toggle-wider) - var(--button-toggle-offset)));
 }
 
@@ -238,16 +238,16 @@
     display: flex;
 }
 
-.app-autosoftway-pricing-table-tiers-tabs {
+.app-onesoftway-pricing-table-tiers-tabs {
     display:none;
 }
 
 // Responsive styles
 @media (max-width: 600px) {
-    .app-autosoftway-pricing-table-tabs {
+    .app-onesoftway-pricing-table-tabs {
         display: none;
     }
-    .app-autosoftway-pricing-table-tiers-tabs {
+    .app-onesoftway-pricing-table-tiers-tabs {
         display:flex;
     }
 

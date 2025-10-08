@@ -31,7 +31,7 @@ const calendarIcon = (
 
 let showTier = (index) => {
 	console.log(">>> showTier called with index:", index);
-    document.querySelectorAll('.app-autosoftway-pricing-table-tier').forEach((tier, tierIndex) => {
+    document.querySelectorAll('.app-onesoftway-pricing-table-tier').forEach((tier, tierIndex) => {
 		console.log(">>> showTier called with index:", index, "tierIndex:", tierIndex);
         if (tierIndex === index) {
             tier.classList.add('tier-active');

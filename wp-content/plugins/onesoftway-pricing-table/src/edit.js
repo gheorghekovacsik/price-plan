@@ -111,14 +111,14 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Features', 'autosoftway-pricing-table' ) }>
+				<PanelBody title={ __( 'Features', 'onesoftway-pricing-table' ) }>
 					<>
 						{ attributes.featureCategories && attributes.featureCategories.map( ( category, categoryIndex ) => (
 							<div key={ categoryIndex }>
 								<HStack key={ categoryIndex } gap="0" justify="start">
 									<TextControl
 										key={ `category-name-${categoryIndex}` }
-										label={ __( 'Category Name:', 'autosoftway-pricing-table' ) }
+										label={ __( 'Category Name:', 'onesoftway-pricing-table' ) }
 										value={ category.name }
 										onChange={ ( value ) => {
 											const newCategories = [ ...attributes.featureCategories ];
@@ -141,7 +141,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								{ category.features && category.features.map( ( feature, featureIndex ) => (
 									<HStack key={ featureIndex } gap="0" justify="start">
 										<TextControl
-											label={ __( `Feature ${ featureIndex + 1 }`, 'autosoftway-pricing-table' ) }
+											label={ __( `Feature ${ featureIndex + 1 }`, 'onesoftway-pricing-table' ) }
 											value={ feature.name }
 											onChange={ ( value ) => {
 												const features = [ ...category.features ];
@@ -174,7 +174,7 @@ export default function Edit( { attributes, setAttributes } ) {
 										setAttributes( { featureCategories: newFeatureCategories } );
 									} }
 								>
-									{ __( 'Add Feature', 'autosoftway-pricing-table' ) }
+									{ __( 'Add Feature', 'onesoftway-pricing-table' ) }
 								</button>
 								<CardDivider />
 							</div>
@@ -188,18 +188,18 @@ export default function Edit( { attributes, setAttributes } ) {
 								setAttributes( { featureCategories: newCategories } );
 							} }
 						>
-							{ __( 'Add Category', 'autosoftway-pricing-table' ) }
+							{ __( 'Add Category', 'onesoftway-pricing-table' ) }
 						</button>
 						
 					</>
 				</PanelBody>
-				<PanelBody title={ __( 'Tiers', 'autosoftway-pricing-table' ) }>
+				<PanelBody title={ __( 'Tiers', 'onesoftway-pricing-table' ) }>
 					{ attributes.tiers && attributes.tiers.map( ( tier, index ) => (
 						<>
-							<label style={{ fontWeight: 'bold', marginTop: '12px' }}>{ __( `Tier ${ index + 1 }`, 'autosoftway-pricing-table' ) }</label>
+							<label style={{ fontWeight: 'bold', marginTop: '12px' }}>{ __( `Tier ${ index + 1 }`, 'onesoftway-pricing-table' ) }</label>
 							<TextControl
 								key={ `name-${index}` }
-								label={ __( `Name:`, 'autosoftway-pricing-table' ) }
+								label={ __( `Name:`, 'onesoftway-pricing-table' ) }
 								value={ tier.name }
 								onChange={ ( value ) => {
 									const newTiers = [ ...attributes.tiers ];
@@ -209,7 +209,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							/>
 							<TextControl
 								key={ `usd-${index}` }
-								label={ __( `Price USD:`, 'autosoftway-pricing-table' ) }
+								label={ __( `Price USD:`, 'onesoftway-pricing-table' ) }
 								value={ tier.priceUSD }
 								onChange={ ( value ) => {
 									const newTiers = [ ...attributes.tiers ];
@@ -219,7 +219,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							/>
 							<TextControl
 								key={ `cad-${index}` }
-								label={ __( `Price CAD:`, 'autosoftway-pricing-table' ) }
+								label={ __( `Price CAD:`, 'onesoftway-pricing-table' ) }
 								value={ tier.priceCAD }
 								onChange={ ( value ) => {
 									const newTiers = [ ...attributes.tiers ];
@@ -229,7 +229,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							/>
 							<TextControl
 								key={ `cad-${index}` }
-								label={ __( `Button Label:`, 'autosoftway-pricing-table' ) }
+								label={ __( `Button Label:`, 'onesoftway-pricing-table' ) }
 								value={ tier.buttonText }
 								onChange={ ( value ) => {
 									const newTiers = [ ...attributes.tiers ];
@@ -239,7 +239,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							/>
 							<TextControl
 								key={ `cad-${index}` }
-								label={ __( `Button url:`, 'autosoftway-pricing-table' ) }
+								label={ __( `Button url:`, 'onesoftway-pricing-table' ) }
 								value={ tier.buttonUrl }
 								onChange={ ( value ) => {
 									const newTiers = [ ...attributes.tiers ];
@@ -249,7 +249,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							/>
 							{ attributes.featureCategories.length > 0 && attributes.featureCategories.map( ( featureCategory, featureCategoryIndex ) => (
 								<>
-									<label style={{ fontWeight: 'bold' }}>{ __( featureCategory.name, 'autosoftway-pricing-table' ) }</label>
+									<label style={{ fontWeight: 'bold' }}>{ __( featureCategory.name, 'onesoftway-pricing-table' ) }</label>
 									<Spacer height="8px" />
 									{ featureCategory.features && featureCategory.features.map( ( feature, featureIndex ) => (
 										<CheckboxControl
@@ -279,71 +279,71 @@ export default function Edit( { attributes, setAttributes } ) {
 				</PanelBody>
 			</InspectorControls>
 			<div { ...useBlockProps() }>
-				<div className='app-autosoftway-pricing-table-currency-toggle'>
+				<div className='app-onesoftway-pricing-table-currency-toggle'>
 					<div>USD</div>
-					<label class="app-autosoftway-pricing-switch">
+					<label class="app-onesoftway-pricing-switch">
 						<input type="checkbox" onChange={ ( event ) => {
 							const isChecked = event.target.checked;
 							setAttributes( { currency: isChecked ? 'CAD' : 'USD' } );
 						} }/>
-						<span class="app-autosoftway-pricing-slider"></span>
+						<span class="app-onesoftway-pricing-slider"></span>
 					</label>
 					<div>CAD</div>
 				</div>
 
-				<div className='app-autosoftway-pricing-table-desktop-header'>
+				<div className='app-onesoftway-pricing-table-desktop-header'>
 					<div>
 						Features
 					</div>
 					{attributes.tiers && attributes.tiers.map((tier, index) => (
-						<div id={`tier-${index}`} className={`app-autosoftway-pricing-table-tier ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
+						<div id={`tier-${index}`} className={`app-onesoftway-pricing-table-tier ${tier.isPopular ? 'app-onesoftway-pricing-popular-background' : ''}`}>
 							{
-							  tier.isPopular && <div className='app-autosoftway-pricing-table-tier-popular-badge'>Most Popular</div>
+							  tier.isPopular && <div className='app-onesoftway-pricing-table-tier-popular-badge'>Most Popular</div>
 							}
 							{tier.name}
-							<div className='app-autosoftway-pricing-table-tier-price'>
+							<div className='app-onesoftway-pricing-table-tier-price'>
 								{currency === 'CAD' ? (
-									<span className='app-autosoftway-pricing-table-tier-price-money'>{tier.priceCAD} <span className="app-autosoftway-pricing-table-tier-price-suffix">CAD / month</span></span>
+									<span className='app-onesoftway-pricing-table-tier-price-money'>{tier.priceCAD} <span className="app-onesoftway-pricing-table-tier-price-suffix">CAD / month</span></span>
 								) : (
-									<span className='app-autosoftway-pricing-table-tier-price-money'>{tier.priceUSD} <span className="app-autosoftway-pricing-table-tier-price-suffix">USD / month</span></span>
+									<span className='app-onesoftway-pricing-table-tier-price-money'>{tier.priceUSD} <span className="app-onesoftway-pricing-table-tier-price-suffix">USD / month</span></span>
 								)}
 							</div>
 							<a
 								href={tier.buttonUrl}
-								className="app-autosoftway-pricing-table-tier-button wp-element-button">
+								className="app-onesoftway-pricing-table-tier-button wp-element-button">
 								{tier.buttonText}
 							</a>
 						</div>
 					))}
 				</div>
-				<div className='app-autosoftway-pricing-table-tabs'>
+				<div className='app-onesoftway-pricing-table-tabs'>
 					{attributes.featureCategories && attributes.featureCategories.map((category, index) => (
-						<div key={index} className="app-autosoftway-pricing-table-tab">
+						<div key={index} className="app-onesoftway-pricing-table-tab">
 							<a href={`#category-${category.id}`}>{category.name}</a>
 						</div>
 					))}
 				</div>
-				<div className='app-autosoftway-pricing-table-tiers-tabs'>
+				<div className='app-onesoftway-pricing-table-tiers-tabs'>
 					{attributes.tiers && attributes.tiers.map((tier, index) => (
-						<div key={index} className="app-autosoftway-pricing-table-tier-tab">
+						<div key={index} className="app-onesoftway-pricing-table-tier-tab">
 							<button>{tier.name}</button>
 						</div>
 					))}
 				</div>
 				
-				<div className='app-autosoftway-pricing-table-desktop-features'>
+				<div className='app-onesoftway-pricing-table-desktop-features'>
 					{attributes.featureCategories && attributes.featureCategories.map((category, categoryIndex) => (
-						<div key={categoryIndex} className="app-autosoftway-pricing-table-feature-category">
-							<div className="app-autosoftway-pricing-table-feature-category-name">
+						<div key={categoryIndex} className="app-onesoftway-pricing-table-feature-category">
+							<div className="app-onesoftway-pricing-table-feature-category-name">
 								<div id={`category-${category.id}`}>{category.name}</div>
 							</div>
 							{category.features && category.features.map((feature, featureIndex) => (
-								<div key={featureIndex} className="app-autosoftway-pricing-table-feature-row">
-									<div className="app-autosoftway-pricing-table-feature-name">
+								<div key={featureIndex} className="app-onesoftway-pricing-table-feature-row">
+									<div className="app-onesoftway-pricing-table-feature-name">
 										{feature.name}
 									</div>
 									{attributes.tiers && attributes.tiers.map((tier, index) => (
-										<div className={`tier-checkmark-${index} app-autosoftway-pricing-table-checkmark ${tier.isPopular ? 'app-autosoftway-pricing-popular-background' : ''}`}>
+										<div className={`tier-checkmark-${index} app-onesoftway-pricing-table-checkmark ${tier.isPopular ? 'app-onesoftway-pricing-popular-background' : ''}`}>
 											{tier.features && tier.features.includes(feature.id) ? checkMarkIcon : hyphenIcon}
 										</div>
 									))}
