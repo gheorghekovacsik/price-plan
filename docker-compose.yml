@@ -12,6 +12,7 @@ services:
       WORDPRESS_DB_NAME: wordpress_db
     volumes:
       - ./wp-content:/var/www/html/wp-content
+      - ./php.ini:/usr/local/etc/php/conf.d/custom.ini
     depends_on:
       - db
 
